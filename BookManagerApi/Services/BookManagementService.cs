@@ -38,6 +38,14 @@ namespace BookManagerApi.Services
             return book;
         }
 
+        public Book DeleteBookById(long id)
+        {
+            var book = FindBookById(id);
+
+            _context.Remove(book);
+            _context.SaveChanges();
+            return book;
+        }
         public Book FindBookById(long id)
         {
             var book = _context.Books.Find(id);
@@ -48,6 +56,9 @@ namespace BookManagerApi.Services
         {
             return _context.Books.Any(b => b.Id == id);
         }
+
+
+       
     }
 }
 
