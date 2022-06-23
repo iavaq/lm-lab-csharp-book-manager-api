@@ -26,8 +26,13 @@ namespace BookManagerApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Book> GetBookById(long id)
         {
-            var book = _bookManagementService.FindBookById(id);
-            return book;
+            if (_bookManagementService.BookExists(id))
+            {
+                var book = _bookManagementService.FindBookById(id);
+                return book;
+            }
+
+            return NotFound();
         }
 
         // PUT: api/v1/book/5
@@ -35,8 +40,15 @@ namespace BookManagerApi.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateBookById(long id, Book book)
         {
-            _bookManagementService.Update(id, book);
-            return NoContent();
+            if (_bookManagementService.BookExists(id))
+            {
+                _bookManagementService.Update(id, book);
+                return NoContent();
+            }
+
+            return NotFound();
+
+            
         }
 
         // POST: api/v1/book
@@ -44,15 +56,26 @@ namespace BookManagerApi.Controllers
         [HttpPost]
         public ActionResult<Book> AddBook(Book book)
         {
-            _bookManagementService.Create(book);
-            return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
+            if (!_bookManagementService.BookExists(book.Id))
+            {
+                _bookManagementService.Create(book);
+                return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
+            }
+
+            return BadRequest();
         }
 
-        [HttpDelete]
+        // DELETE: api/v1/book/5
+        [HttpDelete("{id}")]
         public IActionResult DeleteBookById(long id)
         {
-            _bookManagementService.DeleteBookById(id);
-            return NoContent();
+            if (_bookManagementService.BookExists(id))
+            {
+                _bookManagementService.DeleteBookById(id);
+                return NoContent();
+            }
+
+            return NotFound();
         }
 
     }

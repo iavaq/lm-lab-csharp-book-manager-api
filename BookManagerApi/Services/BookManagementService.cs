@@ -44,6 +44,7 @@ namespace BookManagerApi.Services
 
             _context.Remove(book);
             _context.SaveChanges();
+            
             return book;
         }
         public Book FindBookById(long id)
