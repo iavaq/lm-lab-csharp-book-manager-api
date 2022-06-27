@@ -49,7 +49,7 @@ namespace BookManagerApi.Services
         }
         public Book FindBookById(long id)
         {
-            Book? book = _context.Books.Find(id);
+            var book = _context.Books.Find(id);
             return book;
         }
 

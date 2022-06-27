@@ -32,7 +32,7 @@ namespace BookManagerApi.Controllers
                 return book;
             }
 
-            return NotFound();
+           return NotFound();
         }
 
         // PUT: api/v1/book/5
@@ -46,7 +46,7 @@ namespace BookManagerApi.Controllers
                 return NoContent();
             }
 
-            return NotFound();
+           return NotFound();
 
             
         }

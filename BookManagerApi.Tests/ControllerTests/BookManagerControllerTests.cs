@@ -43,6 +43,7 @@ public class BookManagerControllerTests
     {
         //Arrange
         var testBookFound = GetTestBooks().FirstOrDefault();
+        _mockBookManagementService.Setup(b => b.BookExists(1)).Returns(true);
         _mockBookManagementService.Setup(b => b.FindBookById(1)).Returns(testBookFound);
 
         //Act
@@ -58,8 +59,8 @@ public class BookManagerControllerTests
     {
         //Arrange
         long existingBookId = 3;
-        Book existingBookFound = GetTestBooks()
-            .FirstOrDefault(b => b.Id.Equals(existingBookId));
+        _mockBookManagementService.Setup(b => b.BookExists(3)).Returns(true);
+        Book existingBookFound = GetTestBooks().FirstOrDefault(b => b.Id.Equals(existingBookId));
 
         var bookUpdates = new Book() { Id = 3, Title = "Book Three", Description = "I am updating this for Book Three", Author = "Person Three", Genre = Genre.Education };
 
