@@ -70,6 +70,7 @@ public class BookManagerControllerTests
         var result = _controller.UpdateBookById(existingBookId, bookUpdates);
 
         //Assert
+        _mockBookManagementService.Verify(b => b.BookExists(existingBookId), Times.Once());
         result.Should().BeOfType(typeof(NoContentResult));
     }
 
@@ -100,10 +101,12 @@ public class BookManagerControllerTests
         var result = _controller.DeleteBookById(existingBookId);
 
         //Assert
+        _mockBookManagementService.Verify(b => b.BookExists(existingBookId), Times.Once());
         result.Should().BeOfType(typeof(NoContentResult));
     }
 
-    private static List<Book> GetTestBooks()
+
+        private static List<Book> GetTestBooks()
     {
         return new List<Book>
         {
