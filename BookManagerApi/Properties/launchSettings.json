@@ -32,7 +32,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BookManagerApi": "server=localhost; database=bookshop; user=bookmanagerapi; password=apiuser123"
       },
       "applicationUrl": "https://localhost:7230;http://localhost:5213",
       "dotnetRunMessages": true
