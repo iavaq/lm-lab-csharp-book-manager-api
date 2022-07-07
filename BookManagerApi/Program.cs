@@ -3,8 +3,8 @@ using BookManagerApi.Models;
 using BookManagerApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-//var connectionString = builder.Configuration.GetConnectionString("BookManagerApi");
-var connectionString = Environment.GetEnvironmentVariable("BookManagerApi"); 
+var connectionString = builder.Configuration.GetConnectionString("BookManagerApi");
+//var connectionString = Environment.GetEnvironmentVariable("BookManagerApi"); 
 builder.Services.AddScoped<IBookManagementService, BookManagementService>();
 builder.Services.AddControllers();
 if (builder.Environment.EnvironmentName == "Testing")
